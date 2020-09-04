@@ -3,12 +3,101 @@
 {% block title %} Página Inicial {% endblock %}
 
 {% block body %}
-<main role="main" class="container">
+<div class="container">
 
-    <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    <!-- Esse código foi convertido do README do GitHub utilizando o pandoc -->
+    <h2 id="-sobre-o-projeto" class="pt-3 mt-3">💻 Sobre o projeto</h2>
+    <hr class="clearfix w-100 pb-3">
+    <h3 id="a-empresa-fictícia">A Empresa (fictícia):</h3>
+    <p>A XasTree Financial Services é uma empresa que cuida de XasFinanças e XasInvestimentos de seus clientes, e, recentemente fechou parceria com uma empresa para que todos os seus funcionários pudessem realizar investimentos e terem acessoria.</p>
+    <h3 id="o-desenvolvedor">O Desenvolvedor:</h3>
+    <p>Contratado pela XasTree, desenvolveu um sitema Web para substituir seu antigo sistema arcaico em versão clipper.</p>
+    <h3 id="o-sistema">O Sistema:</h3>
+    <p>Tem como principal objetivo fazer com que tanto os investidores, quanto os corretorem possam verificar seus investimentos, e, para isso, foi desenvolvido um sistema utilizando as mais atuais XasTecnologias do mercado, como:</p>
+    <ul>
+        <li>Python com o framework Flask;</li>
+        <li>Banco de Dados MySQL;</li>
+        <li>Bootstrap v4.5.2;</li>
+        <li>Git e GitHub.</li>
+    </ul>
+    <h3 id="back-end">Back-end:</h3>
+    <p>Essa vertente é responsável por tratar requisições e respostas, bem como gerenciar as rotas. Os processos de CRUD (Create, Read, Update e Delete) são realizados nessa parte, sendo assim, gerencia o banco de Dados também.</p>
+    <h3 id="front-end">Front-end:</h3>
+    <p>Responsável pela "interface gráfica" do sistema, nele se torna possível executar as funções contidas no back-end de maneira fácil e intuitiva.</p>
+    <h3 id="funcionalidades-do-sistema">Funcionalidades do Sistema:</h3>
+    <ul class="task-list">
+        <li><input type="checkbox" disabled="" checked="" />
+        Listar todos os clientes, com seus respectivos investimentos;</li>
+        <li><input type="checkbox" disabled="" checked="" />
+        Pesquisar cliente informando seu email, e, após encontrado é pessível ver qual investimento está assiciado a ele;</li>
+        <li><input type="checkbox" disabled="" checked="" />
+        Gerenciar clientes, nessa função é possível adicionar e remover um cliente, bem como, alterar seus dados já cadastrados, como por exemplo, o investimento vinculado a ele;</li>
+        <li><input type="checkbox" disabled="" checked="" />
+        Gerenciar investimentos, nessa função é possível criar, editar ou remover um determinado investimento;</li>
+        <li><input type="checkbox" disabled="" checked="" />
+        Sincronizar clientes com a API fornecida pela empresa parceira;</li>
+        <li><input type="checkbox" disabled="" checked="" />
+        Reconstruir o banco de dados, apagando assim todos os clientes e investimentos associados anteriormente.</li>
+    </ul>
+    <h2 id="-como-executar-o-projeto" class="pt-3">🚀 Como executar o projeto</h2>
+    <hr class="clearfix w-100 pb-3">
+    <h3 id="pré-requisitos">Pré-requisitos:</h3>
+    <p>Ter os seguintes software instalados e executando na máquina:</p>
+    <ul>
+        <li>Python (versão 3.8.5) com pip;</li>
+        <li>MySQL;</li>
+        <li>Git.</li>
+    </ul>
+    <h3 id="instalação-e-configuração-do-ambiente">Instalação e configuração do ambiente:</h3>
+    <p>Para que na aplicação não ocorra uma XasXception (erro), primeiramente execute os comandos do arquivo "db_create.sql" em seu banco de dados MySQL.</p>
+    <p>Após isso, abra o terminal (ou CMD) na pasta que deseja trabalhar e execute os seguintes comandos:</p>
+    <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash">
+        <span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co"># Clona a aplicação do GitHub</span></span>
+        <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>$ <span class="fu">git</span> clone https://github.com/leonardopigatto/XasTeste.git</span>
+        <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+        <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="co"># Acessa a pasta que contém os códigos</span></span>
+        <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>$ <span class="bu">cd</span> XasTeste</span>
+        <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+        <span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co"># Instala as bibliotecas necessárias</span></span>
+        <span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>$ <span class="ex">pip</span> install flask-mysqldb</span>
+        <span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>$ <span class="ex">pip</span> install requests</span></code></pre>
     </div>
-  
-</main><!-- /.container -->
+    <h3 id="inicialização">Inicialização:</h3>
+    <p>Certifique-se de que os banco de dados esteja criado e executando com suas respectivas tabelas e inicialize o programa utilizando o comando:</p>
+    <ul>
+    <li>OBS: lembre-se de estar na pasta que contém os arquivos baixados.</li>
+    </ul>
+    <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash">
+        <span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co"># Inicia a aplicação</span></span>
+        <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>$ <span class="ex">python</span> app.py</span></code></pre>
+    </div>
+    <h3 id="acesso">Acesso:</h3>
+    <p>Após inicializado, é possível acessar o sistema no endereço <a href="/">http://127.0.0.1:5000/</a>.</p>
+    <h2 id="rotas" class="pt-3">🛠 Rotas</h2>
+    <hr class="clearfix w-100 pb-3">
+    <ul>
+        <li><p><code><a href="/listarClientes">/listarClientes</a></code> -&gt; Para listar todos os clientes;</p></li>
+        <li><p><code><a href="/pesquisar">/pesquisar</a></code> -&gt; Para pesquisar um cliente;</p></li>
+        <li><p><code><a href="/controleClientes">/controleClientes</a></code> -&gt; Para gerenciar os clientes;</p></li>
+        <li><p><code><a href="/controleInvestimentos">/controleInvestimentos</a></code> -&gt; Para gerenciar os investimentos;</p></li>
+        <li><p><code><a href="/inserirAPI">/inserirAPI</a></code> -&gt; Para importar os clientes da API;</p></li>
+        <li><p><code><a href="/resetDB">/resetDB</a></code> -&gt; Para reconstruir o banco de dados (ATENÇÃO: ISSO APAGARÁ TODOS OS DADOS PRESENTES NO BANCO);</p></li>
+        <li><p>As demais rotas estão abtraídas na interface.</p></li>
+    </ul>
+    <h2 id="possíveis-melhorias" class="pt-3">🚧 Possíveis melhorias</h2>
+    <hr class="clearfix w-100 pb-3">
+    <ul class="task-list">
+        <li><input type="checkbox" disabled="" />
+        Sistema de login com níveis de usuários;</li>
+        <li><input type="checkbox" disabled="" />
+        Utilização de Docker e Docker Composer;</li>
+        <li><input type="checkbox" disabled="" />
+        Validações de conexão com o banco de dados para não ocorrer os exceptions;</li>
+        <li><input type="checkbox" disabled="" />
+        Melhorar responsividade para smartphones por conta das tabelas;</li>
+        <li><input type="checkbox" disabled="" />
+        Incluir mais campos na tabela de investimentos, trazendo mais funções ao sistema como valor investido e dados pertinentes sobre o investimento, por exemplo, rendimento, taxa de administração, rentabilidade em um determinado período, cotização, etc.</li>
+    </ul>
+
+</div><!-- /.container -->
 {% endblock %}
