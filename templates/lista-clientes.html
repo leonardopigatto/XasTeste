@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %} Lista de Clientes {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="starter-template">
+
+        <!-- ---------- Cabeçalho ---------- -->
+        <div class="row justify-content-center my-4">
+            <div class="col mx-5">
+                <h1>XasTree Financial Services</h1>
+                <h3>Lista de Clientes</h3>
+            </div>
+        </div>
+
+        <!-- ---------- Tabela (Header) ---------- -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Investimento</th>
+                </tr>
+            </thead>
+
+            <!-- ---------- Tabela (Body) ---------- -->
+            <tbody>
+
+                {% for linha_clientes in clientes %}
+
+                <tr>
+                    <td>{{ linha_clientes.0 }}</td><!-- ID do Cliente-->
+                    <td>{{ linha_clientes.1 }} {{ linha_clientes.2 }}</td><!-- Nome e Sobrenome do Cliente-->
+                    <td>{{ linha_clientes.3 }}</td><!-- Email do Cliente-->
+
+                    <!-- Procura nos investimentos qual está relacionado com aquele cliente -->
+                    <!-- Poderia ser feito sem o loop, mas soube colocar o indice da posição -->
+                    {% for linha_investimentos in investimentos %}
+
+                        {% if linha_investimentos.0 == linha_clientes.4 %}
+                            <td>{{ linha_investimentos.1 }}</td><!-- Nome do Investimento -->
+                        {% endif %}
+
+                    {% endfor %}
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="4">Nenhum dado encontrado :/</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div><!-- Fecha starter template -->
+</div><!-- Fecha container -->
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %} Pesquisa {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="starter-template">
+
+        <!-- ---------- Cabeçalho ---------- -->
+        <div class="row justify-content-center my-4">
+            <div class="col-auto mx-5">
+                <h1>XasTree Financial Services</h1>
+                <h3>Pesquisar Cliente</h3>
+            </div>
+            <div class="col-auto mx-5 my-auto">
+                <form class="form-inline my-2 my-lg-0" action="" method="POST">
+                    <input class="form-control mr-sm-2" name="email" type="text" placeholder="Digite o email..." aria-label="Digite o email...">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </div> 
+
+        <!-- ---------- Tabela (Header) ---------- -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Investimento</th>
+                </tr>
+            </thead>
+
+            <!-- ---------- Tabela (Body) ---------- -->
+            <tbody>
+
+                {% for dados in cliente %}
+
+                <tr>
+                    <td>{{ dados.0 }}</td><!-- ID do Cliente-->
+                    <td>{{ dados.1 }} {{ dados.2 }}</td><!-- Nome e Sobrenome do Cliente-->
+                    <td>{{ dados.3 }}</td><!-- Email do Cliente-->
+
+                    <!-- Procura nos investimentos qual está relacionado com aquele cliente -->
+                    <!-- Poderia ser feito sem o loop, mas soube colocar o indice da posição -->
+                    {% for linha_investimentos in investimentos %}
+
+                        {% if linha_investimentos.0 == dados.4 %}
+                            <td>{{ linha_investimentos.1 }}</td><!-- Nome do Investimento -->
+                        {% endif %}
+
+                    {% endfor %}
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="4">Nada a exibir :/</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div><!-- Fecha starter template -->
+</div><!-- Fecha container -->
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block title %} Controle de Investimentos {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="starter-template">
+
+        <!-- ---------- Cabeçalho ---------- -->
+        <div class="row justify-content-center my-4">
+            <div class="col-auto mx-5">
+                <h1>XasTree Financial Services</h1>
+                <h3>Controle de Investimentos</h3>
+            </div>
+            <div class="col-auto mx-5 my-auto">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Adicionar Investimento</button>
+            </div>
+        </div>
+
+        <!-- ---------- Tabela (Header) ---------- -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Investimento</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+
+            <!-- ---------- Tabela (Body) ---------- -->
+            <tbody>
+
+                {% for linha_investimentos in investimentos %}
+
+                <tr>
+                    <td>{{ linha_investimentos.0 }}</td><!-- ID do Investimento -->
+                    <td>{{ linha_investimentos.1 }}</td><!-- Nome do Investimento -->
+                    <td>
+                        <a href="#!" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalEdit{{ linha_investimentos.0 }}">Editar</a>
+                        <a href="/delete/investimentos/{{ linha_investimentos.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                    </td>
+                </tr>
+
+                <!-- ---------- Modal Editar ---------- -->
+                <div id="modalEdit{{ linha_investimentos.0 }}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar dados</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <form action="{{ url_for('updateInvestimento') }}" method="POST">
+
+                                <div class="modal-body">
+                                    <input type="hidden" name="id_investimento" value="{{ linha_investimentos.0 }}"><!-- ID do Investimento -->
+
+                                    <div class="form-group">
+                                        <label>Investimento:</label>
+                                        <input type="text" class="form-control" name="investimento" value="{{ linha_investimentos.1 }}"><!-- Nome do Investimento -->
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-warning" type="submit">Atualizar</button>
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                </div>
+        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="3">Nenhum dado encontrado :/</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div><!-- Fecha starter template -->
+</div><!-- Fecha container -->
+
+    <!-- ---------- Modal Adicionar ---------- -->
+    <div id="modalAdd" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Adicionar Investimento</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <form action="{{ url_for('createInvestimento') }}" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Investimento:</label>
+                            <input type="text" class="form-control" name="investimento">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Adicionar</button>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- Fecha Modal -->
+
+{% endblock %}

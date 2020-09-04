@@ -1,0 +1,180 @@
+{% extends 'layout.html' %}
+
+{% block title %} Controle de Clientes {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="starter-template">
+
+        <!-- ---------- Cabeçalho ---------- -->
+        <div class="row justify-content-center my-4">
+            <div class="col-auto mx-5">
+                <h1>XasTree Financial Services</h1>
+                <h3>Controle de Clientes</h3>
+            </div>
+            <div class="col-auto mx-5 my-auto">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Adicionar Cliente</button>
+            </div>
+        </div> 
+
+        <!-- ---------- Tabela (Header) ---------- -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Investimento</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+
+            <!-- ---------- Tabela (Body) ---------- -->
+            <tbody>
+
+                {% for linha_clientes in clientes %}
+
+                <tr>
+                    <td>{{ linha_clientes.0 }}</td><!-- ID do Cliente-->
+                    <td>{{ linha_clientes.1 }} {{ linha_clientes.2 }}</td><!-- Nome e Sobrenome do Cliente-->
+                    <td>{{ linha_clientes.3 }}</td><!-- Email do Cliente-->
+
+                    <!-- Procura nos investimentos qual está relacionado com aquele cliente -->
+                    <!-- Poderia ser feito sem o loop, mas soube colocar o indice da posição -->
+                    {% for linha_investimentos in investimentos %}
+
+                        {% if linha_investimentos.0 == linha_clientes.4 %}
+                            <td>{{ linha_investimentos.1 }}</td><!-- Nome do Investimento -->
+                        {% endif %}
+
+                    {% endfor %}
+                    <td>
+                        <a href="#!" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalEdit{{ linha_clientes.0 }}">Editar</a>
+                        <a href="/delete/clientes/{{ linha_clientes.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                    </td>
+                </tr>
+
+                <!-- ---------- Modal Editar ---------- -->
+                <div id="modalEdit{{ linha_clientes.0 }}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Editar dados</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <form action="{{ url_for('updateCliente') }}" method="POST">
+                                <div class="modal-body">
+                                        <input type="hidden" name="id_cliente" value="{{ linha_clientes.0 }}"><!-- ID do Cliente -->
+
+                                        <div class="form-group">
+                                            <label>Nome:</label>
+                                            <input type="text" class="form-control" name="nome" value="{{ linha_clientes.1 }}"><!-- Nome do Cliente -->
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <label>Sobrenome:</label>
+                                            <input type="text" class="form-control" name="sobrenome" value="{{ linha_clientes.2 }}"><!-- Sobrenome do Cliente -->
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <label>Email:</label>
+                                            <input type="text" class="form-control" name="email" value="{{ linha_clientes.3 }}"><!-- Email do Cliente -->
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Investimento:</label>
+                                            <select class="form-control" name="investimento" id="investimento">
+
+                                                <!-- Aqui ele exibe o nome do investimento, mas na hora de enviar manda o ID do investimento -->
+                                                {% for linha_investimentos in investimentos %}
+
+                                                    {% if linha_investimentos.0 == linha_clientes.4 %}
+                                                    <option selected value="{{ linha_investimentos.0 }}">{{ linha_investimentos.1 }}</option> <!-- Se for o investimento ativo ele marca como selecionado -->
+            
+                                                    {% else %}
+                                                    <option value="{{ linha_investimentos.0 }}">{{ linha_investimentos.1 }}</option>
+                                                    
+                                                    {% endif %}
+
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-warning" type="submit">Atualizar</button>
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="5">Nenhum dado encontrado :/</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div><!-- Fecha starter template -->
+</div><!-- Fecha container -->
+
+    <!-- ---------- Modal Adicionar ---------- -->
+    <div id="modalAdd" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Adicionar Cliente</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <form action="{{ url_for('createCliente') }}" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input type="text" class="form-control" name="nome">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sobrenome:</label>
+                            <input type="text" class="form-control" name="sobrenome">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Investimento:</label>
+                            <select class="form-control" name="investimento" id="investimento">
+
+                                <!-- Aqui ele exibe o nome do investimento, mas na hora de enviar manda o ID do investimento -->
+                                {% for linha_investimentos in investimentos %}
+
+                                    <option value="{{ linha_investimentos.0 }}">{{ linha_investimentos.1 }}</option>
+
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Adicionar</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- Fecha modal -->
+
+{% endblock %}
