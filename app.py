@@ -1,7 +1,6 @@
 import requests, json
 from flask import Flask, render_template, url_for, redirect, request
 from flask_mysqldb import MySQL
-from pprint import pprint
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
