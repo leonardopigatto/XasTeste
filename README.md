@@ -61,13 +61,14 @@ $ cd XasTeste
 
 # Instala as bibliotecas necessárias
 $ pip install flask-mysqldb
+$ pip install requests
 ```
 
 ### Inicialização:
 
 Certifique-se de que os banco de dados esteja criado e executando com suas respectivas tabelas e inicialize o programa utilizando o comando: 
 
-- OBS: lembre-se de estar na pasta que contém os arquivos baixados
+- OBS: lembre-se de estar na pasta que contém os arquivos baixados.
 
 ```bash
 # Inicia a aplicação
